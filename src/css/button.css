@@ -1,0 +1,9 @@
+.button
+{
+    color: antiquewhite;
+}
+
+.button:disabled
+{
+   color: rgb(233, 190, 133);
+}
