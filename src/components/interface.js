@@ -88,7 +88,7 @@ export const Interface = () => {
       <TextField className={classes.customTextField} placeholder="Search by ID" onChange={search}></TextField>
       <SortBy selectedOption={(selectedValue)=>{console.log("selected values is :",selectedValue);fetchData(DISCOVER_URL, {sort_by:selectedValue, page: page})}}/>
       <Movies movies={movies}/>
-      <p>search keyword is : {searchKeyword}</p>   
+      <p>search keyword is : {searchKeyword}</p>
     </div>
   </React.Fragment>
   );
