@@ -90,7 +90,6 @@ export const Interface = () => {
       <Movies movies={movies}/>
       <p>search keyword is : {searchKeyword}</p>   
     </div>
-   
   </React.Fragment>
   );
 }
