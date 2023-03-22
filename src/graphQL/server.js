@@ -7,19 +7,28 @@ type Movie {
   id: ID
   name: String
   releaseDate: String
-  image: String
+  image: String,
+  page: ID,
+  totalPages: ID
 },
+input Params{
+  page: ID,
+  sort_by: String
+}
+
 type Query {
-  movies: [Movie],
+  movies(_params: Params): [Movie],
   search(_id: ID): Movie,
   hello: String
 }
 `;
 
-const discoverMovies = async () => {
-    return (await axios.get(DISCOVER_URL)
+const discoverMovies = async (_params) => {
+  console.log("query_params: ", _params);
+    return (await axios.get(DISCOVER_URL, {params: _params})
     .then((response) => {
-        return response.data.results;
+      console.log("fetched_data: ", response.data);
+        return response.data;
     }).catch(error => {
       console.log("error: ", error);
       throw error;
@@ -44,14 +53,18 @@ const searchMovie = async (_id) =>
 
 const resolvers = {
   Query: {
-    movies: async () => {
-        const _movies = await discoverMovies();
-        console.log("rest api data: ", _movies);
-        const data = _movies.map(movie => ({
+    movies: async (_, {_params}, context) => {
+      console.log("context: ", context);
+      console.log("params: ", _params);
+        const _movies = await discoverMovies(_params);
+        const data = _movies.results.map(movie => ({
             id: movie.id,
             name: movie.original_title,
             releaseDate: movie.release_date,
-            image: movie.poster_path}));
+            image: movie.poster_path,
+            page: _movies.page,
+            totalPages: _movies.total_pages,
+          }));
       return data;
     },
     search: async (_, {_id}, context) => {
@@ -61,7 +74,9 @@ const resolvers = {
             id: movie.id,
             name: movie.original_title,
             releaseDate: movie.release_date,
-            image: movie.poster_path
+            image: movie.poster_path,
+            page:"",
+            totalPages:""
         }
     },
     hello: () => "hello from graphQL",

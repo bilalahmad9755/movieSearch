@@ -1,50 +1,68 @@
+import { DISCOVER_MOVIES, SEARCH_MOVIE } from "../graphQL/queries";
+import { client } from "../graphQL/client";
+import { useQuery} from '@apollo/client';
 import { TextField} from "@mui/material";
-import {makeStyles} from "@mui/styles";
-import React, { useEffect, useState} from 'react';
-import { Movies } from './movies';
-import {Pages} from './pages';
-import axios from 'axios';
+import React, { useState } from 'react';
 import {DISCOVER_URL} from '../APIref';
+import {makeStyles} from "@mui/styles";
+import { Movies } from './movies';
+import { SortBy } from "./sortBy";
+import {Pages} from './pages';
 import "../css/searchBar.css";
 import "../css/button.css";
 import "../css/topBar.css";
-import { SortBy } from "./sortBy";
+import axios from 'axios';
+import { parse } from "@ethersproject/transactions";
 
-const useStyles = makeStyles((theme) => ({
-    customTextField: {
-      '& .MuiInputBase-root': {
+const useStyles = makeStyles((theme) => 
+(
+  {
+    customTextField:
+    {
+      '& .MuiInputBase-root':
+      {
         backgroundColor: 'rgb(15, 172, 151)',
         borderRadius: '50px',
         color: 'antiquewhite',
-
       },
-      '& .MuiOutlinedInput-root': {
-        '& fieldset': {
+      '& .MuiOutlinedInput-root': 
+      {
+        '& fieldset': 
+        {
           borderColor: 'antiquewhite',
-        
-
         },
-        '&:hover fieldset': {
+        '&:hover fieldset':
+        {
           borderColor: 'antiquewhite',
-
         },
-        '&.Mui-focused fieldset': {
+        '&.Mui-focused fieldset': 
+        {
           borderColor: 'antiquewhite',
         },
       },
-    },
-  }));
+    },  
+  }
+));
 
 
-export const Interface = () => {
-  const [searchKeyword, setSearchkeyword] = useState('');
+export const Interface = () => 
+{
+  const [searchKeyword, setSearchKeyword] = useState(9999);
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState('');
+  var params = {page:page, sort_by:""};
+  const classes = useStyles();
 
- useEffect(() => {
-  fetchData(DISCOVER_URL, {});
- }, [])
+  
+  
+  useQuery
+  (DISCOVER_MOVIES, {variables: {params},
+    onCompleted: data => {setMovies(data.movies);
+    setTotalPages(parseInt(data.movies[0].totalPages));
+  }});
+
+
 
   const fetchData = (url ,params) => {
     axios.get(url,{params:params})
@@ -53,33 +71,38 @@ export const Interface = () => {
     });
   };
 
+
  // param array is null coz there is no dependency for re-fetching data...
   
   const search = (e) => {
     if(e.target.value.length === 0)
     {
-      fetchData(DISCOVER_URL, {});
+      console.log("search nothing...");
+      client.query({query: DISCOVER_MOVIES, variables: {params}})
+      .then(response => {setMovies(response.data.movies)})
+      .catch(error => console.log("displaying error: ", error));
     }
     else
     {
-      setSearchkeyword(e.target.value);
-      console.log("requesting url is: ", `https://api.themoviedb.org/3/movie/${e.target.value}?api_key=218b7f1fbdaf98f5b027b8b2bcd63007`);
-      axios.get(`https://api.themoviedb.org/3/movie/${e.target.value}?api_key=218b7f1fbdaf98f5b027b8b2bcd63007`)
-      .then((response) => {
-        setMovies([response.data])})
-        .catch(error => {
-          setSearchkeyword("Invalid!!!");
-          console.log("error: ", error);});
+      console.log("searching executed...");
+      const searchId = e.target.value;
+      client.query({query: SEARCH_MOVIE, variables: {searchId}})
+      .then(response => {setMovies([response.data.search])})
+      .catch(error => console.log("displaying error: ", error));
     }
   }
   
   const shiftPage = (page) =>
   {
-    fetchData(DISCOVER_URL, {page: page});
-    window.scrollTo(0,0);
+    params = {...params, page: page};
+    console.log("params updated: ", params);
+    console.log(totalPages);
+    client.query({query: DISCOVER_MOVIES, variables: {params}})
+    .then(response => {setMovies(response.data.movies);setPage(parseInt(response.data.movies[0].page))
+    })
+    .catch(error => console.log("displaying error: ", error));
   }
 
-  const classes = useStyles();
   return (
   <React.Fragment>
     <div className="topBar">

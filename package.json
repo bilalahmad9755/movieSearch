@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.7.10",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/lab": "^5.0.0-alpha.122",
@@ -25,7 +26,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "server": "node ./src/server.js",
+    "server": "node ./src/graphQL/server.js",
     "client": "react-scripts start",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "build": "react-scripts build",

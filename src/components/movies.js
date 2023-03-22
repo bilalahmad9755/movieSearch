@@ -15,14 +15,14 @@ export const Movies = ({movies}) =>
         <div key= {index}className='card'>
           <br />
           {
-            movie.poster_path != null ? (
-            <img className='img' alt='No Preview' src={IMG_BASE_URL + movie.poster_path} width={250} height={250}></img>)
-            : (<h1>No image</h1>)
+            movie.image != null ? (
+            <img className='img' alt='No Preview' src={IMG_BASE_URL + movie.image} width={250} height={250}></img>)
+            :(<h1>No image</h1>)
           }
           
-          <h2>{movie.original_title}</h2>
+          <h2>{movie.name}</h2>
           <p>Id: {movie.id}</p>
-          <p>Release Date: {movie.release_date}</p>
+          <p>Release Date: {movie.releaseDate}</p>
           <br />
         </div>
         ))
