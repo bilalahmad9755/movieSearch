@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const DISCOVER_MOVIES = gql`
-  query discover($params: Params){
+  query discover($params: Params = {page:1, sort_by:""}){
     movies(_params:$params){
       id
       name

@@ -48,12 +48,16 @@ export const SortBy = ({selectedOption}) =>
       <br />
       <FormControl>
         <InputLabel className={classes.input} >SortBy</InputLabel>
-        <Select className={classes.select} value={sortBy} onChange = {handleChange}>
-          {
-            sortOptions.map((value, index)=>(
-            <MenuItem className={classes.menuItem} key = {index} value= {value}> {value} </MenuItem>
-            ))
-          }
+        <Select className={classes.select} 
+        value={sortBy} 
+        onChange = {handleChange}>
+          {sortOptions.map((value, index)=>(
+          <MenuItem 
+          className={classes.menuItem} 
+          key = {index} 
+          value = {value}>
+          {value}
+          </MenuItem>))}
         </Select>
       </FormControl>
     </div>  

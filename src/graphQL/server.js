@@ -58,8 +58,7 @@ const searchMovie = async (_id) =>
 const resolvers = {
   Query: {
     movies: async (_, {_params}, context) => {
-      console.log("context: ", context);
-      console.log("params: ", _params);
+      console.log("parameters on server: ", _params);
         const _movies = await discoverMovies(_params);
         const data = _movies.results.map(movie => ({
             id: movie.id,

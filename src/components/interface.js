@@ -49,22 +49,20 @@ export const Interface = () =>
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState('');
   const [queryParams, setQueryParams] = useState({page:1, sort_by: ''});
-  var params = {page:1, sort_by:""};
   const classes = useStyles();
 
   
   
   useQuery
-  (DISCOVER_MOVIES, {variables: {params},
+  (DISCOVER_MOVIES, {
     onCompleted: data => {setMovies(data.movies);
     setTotalPages(parseInt(data.movies[0].totalPages));
   }});
-
- // param array is null coz there is no dependency for re-fetching data...
   
   const search = (e) => {
     if(e.target.value.length === 0)
     {
+      const params = {page: queryParams.page, sort_by: queryParams.sort_by}
       console.log("search nothing...");
       client.query({query: DISCOVER_MOVIES, variables: {params}})
       .then(response => {setMovies(response.data.movies)})
@@ -84,7 +82,7 @@ export const Interface = () =>
   const shiftPage = (page) =>
   {    
 
-    params = {page: page, sort_by: queryParams.sort_by};
+    const params = {page: page, sort_by: queryParams.sort_by};
     console.log("state before page shifting: ", params);
     client.query({query: DISCOVER_MOVIES, variables: {params}})
     .then(response => {setMovies(response.data.movies);setPage(parseInt(response.data.movies[0].page));
@@ -94,12 +92,13 @@ export const Interface = () =>
   const applySorting = (_sortby) =>
   {
 
-    params = {page: page, sort_by:_sortby};
+    const params = {page: page, sort_by:_sortby};
     console.log("state before sorting: ", params);
     client.query({query: DISCOVER_MOVIES, variables: {params}})
-    .then(response => {setMovies(response.data.movies);setPage(parseInt(response.data.movies[0].page));
-      setQueryParams({...queryParams, sort_by: _sortby});
-    })
+    .then(response => {setMovies(response.data.movies);
+        setPage(parseInt(response.data.movies[0].page));
+        setQueryParams({...queryParams, sort_by: _sortby});
+      })
     .catch(error => console.log("displaying error: ", error));
   }
 
@@ -110,9 +109,12 @@ export const Interface = () =>
       <Pages current={page} total={totalPages} shift={(page)=> {shiftPage(page)}}/>
       <TextField className={classes.customTextField} placeholder="Search by ID" onChange={search}></TextField>
       <p>search keyword is : {searchKeyword}</p>
-      <SortBy selectedOption={(selectedValue)=>{console.log("selected values is :",selectedValue);applySorting(selectedValue)}}/>
+      <SortBy selectedOption={
+        (selectedValue)=>{
+          console.log("selected values is :",
+          selectedValue);
+          applySorting(selectedValue)}}/>
       <Movies movies={movies}/>
-    
     </div>
   </React.Fragment>
   );
