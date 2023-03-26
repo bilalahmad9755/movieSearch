@@ -1,7 +1,7 @@
 
 import {FormControl, InputLabel, Select, MenuItem} from '@mui/material';
 import { makeStyles} from '@mui/styles';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +40,9 @@ export const SortBy = ({selectedOption}) =>
         default: break;
       }
     }
+    // useEffect(()=> {
+    //   selectedOption(sortBy);
+    // }, [sortBy]);
     return(
     <div>
       <br />

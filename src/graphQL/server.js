@@ -25,6 +25,10 @@ type Query {
 
 const discoverMovies = async (_params) => {
   console.log("query_params: ", _params);
+  if(_params.sort_by.length === 0)
+  {
+    _params = {page: _params.page};
+  }
     return (await axios.get(DISCOVER_URL, {params: _params})
     .then((response) => {
       console.log("fetched_data: ", response.data);
