@@ -7,9 +7,11 @@ import {makeStyles} from "@mui/styles";
 import { Movies } from './movies';
 import { SortBy } from "./sortBy";
 import {Pages} from './pages';
+import AnonymousSignIn from "./login";
 import "../css/searchBar.css";
 import "../css/button.css";
 import "../css/topBar.css";
+
 
 const useStyles = makeStyles((theme) => 
 (
@@ -105,7 +107,8 @@ export const Interface = () =>
   return (
   <React.Fragment>
     <div className="topBar">
-      <h1 style={{color : "#0FAC97"}}>Movie Search App</h1>
+      <h1 style={{background : "linear-gradient(20deg, antiquewhite 20%, #0fac98 100%)",WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',}}>Movie Search App</h1>
+      <AnonymousSignIn />
       <Pages current={page} total={totalPages} shift={(page)=> {shiftPage(page)}}/>
       <TextField className={classes.customTextField} placeholder="Search by ID" onChange={search}></TextField>
       <p>search keyword is : {searchKeyword}</p>

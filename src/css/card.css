@@ -1,6 +1,6 @@
 .card
 {
-    background: rgb(15, 172, 151);
+    background: linear-gradient(20deg, antiquewhite 40%, #0fac98 90%);
     width: 300px;
     height: 500px;
     overflow: hidden;
