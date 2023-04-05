@@ -1,16 +1,18 @@
-import '../css/card.css';
-import '../css/grid.css';
-import '../css/img.css';
+import { useContext, useState } from 'react';
 import {Grid } from '@mui/material';
 import { IMG_BASE_URL} from '../APIref';
 import { AuthUser } from '../App';
 import {Favourites} from './favourites';
-import { useContext } from 'react';
+import '../css/card.css';
+import '../css/grid.css';
+import '../css/img.css';
 
 export const Movies = ({movies}) => 
 {
-  const {user} = useContext(AuthUser); 
+  const {user} = useContext(AuthUser);
+ 
   return(
+    
   <div className='grid'>
     <br /><br />
     <Grid className='grid' container gap={3}>

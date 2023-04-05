@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
 import { DISCOVER_MOVIES, SEARCH_MOVIE } from "../graphQL/queries";
 import { client } from "../graphQL/client";
 import { useQuery} from '@apollo/client';
 import { TextField} from "@mui/material";
-import React, { useState } from 'react';
 import {makeStyles} from "@mui/styles";
 import { Movies } from './movies';
 import { SortBy } from "./sortBy";
@@ -107,7 +107,10 @@ export const Interface = () =>
   return (
   <React.Fragment>
     <div className="topBar">
-      <h1 style={{background : "linear-gradient(20deg, antiquewhite 20%, #0fac98 100%)",WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',}}>Movie Search App</h1>
+      <h1 style={
+        {background : "linear-gradient(20deg, antiquewhite 20%, #0fac98 100%)",
+        WebkitBackgroundClip: 'text', 
+        WebkitTextFillColor: 'transparent',}}>Movie Search App</h1>
       <AnonymousSignIn />
       <Pages current={page} total={totalPages} shift={(page)=> {shiftPage(page)}}/>
       <TextField className={classes.customTextField} placeholder="Search by ID" onChange={search}></TextField>

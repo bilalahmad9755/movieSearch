@@ -3,7 +3,9 @@
     background: linear-gradient(20deg, antiquewhite 40%, #0fac98 90%);
     width: 300px;
     height: 500px;
+    white-space:nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
     border-radius: 10px;
     text-align: center;
 }

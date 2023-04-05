@@ -1,13 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
+import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client';
 import {client} from './graphQL/client';
 import {initializeApp} from 'firebase/app';
 import {getDatabase} from 'firebase/database';
 import 'firebase/auth';
+import './index.css';
 
 const config = {
   apiKey: "AIzaSyAD7GWj5lEXdk-m7KJvvPN9J9oLGeEubtk",
