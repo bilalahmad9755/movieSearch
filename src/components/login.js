@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState , useContext} from 'react';
 import {getAuth, signInAnonymously, onAuthStateChanged} from 'firebase/auth';
-import { getDatabase } from "firebase/database";
 import {Button} from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { AuthUser } from '../App';
 const useStyles = makeStyles({
   root: {
     background: 'linear-gradient(45deg, antiquewhite 30%, white 90%)',
@@ -16,9 +16,8 @@ const useStyles = makeStyles({
 });
 const AnonymousSignIn = () => {
   const [error, setError] = useState(null);
-  const [user, setUser] = useState('Login');
   const classes = useStyles();
-
+  const {user, setUser} = useContext(AuthUser);
   const handleSignIn = () => {
     const auth = getAuth();
     signInAnonymously(auth)
@@ -30,7 +29,6 @@ const AnonymousSignIn = () => {
             const uid = user.uid;
             console.log("user_id: ", uid);
             setUser(uid);
-            const database = getDatabase();
           } 
           else 
           {

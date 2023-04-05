@@ -14,7 +14,7 @@ const config = {
   authDomain: "hellofirebase-1139c.firebaseapp.com",
   projectId: "hellofirebase-1139c",
   storageBucket: "hellofirebase-1139c.appspot.com",
-  databaseURL:"https://hellofirebase-1139c-default-rtdb.firebaseio.com",
+  databaseURL:"https://hellofirebase-1139c-default-rtdb.firebaseio.com/",
   messagingSenderId: "673623807411",
   appId: "1:673623807411:web:f6b400522fe3e28a87e7c6",
   measurementId: "G-B6KQT5K7JN"
