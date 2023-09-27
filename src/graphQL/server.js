@@ -1,5 +1,5 @@
 const axios = require('axios');
-const DISCOVER_URL = 'https://api.themoviedb.org/3/discover/movie?api_key=218b7f1fbdaf98f5b027b8b2bcd63007';
+const DISCOVER_URL = 'https://api.themoviedb.org/3/discover/movie?api_key=abc';
 const { ApolloServer, gql } = require('apollo-server');
 
 const typeDefs = gql`
@@ -42,7 +42,7 @@ const discoverMovies = async (_params) => {
 const searchMovie = async (_id) => 
 {
   return (
-    await axios.get(`https://api.themoviedb.org/3/movie/${_id}?api_key=218b7f1fbdaf98f5b027b8b2bcd63007`)
+    await axios.get(`https://api.themoviedb.org/3/movie/${_id}?api_key=abc`)
     .then((response) => 
     {
       return response.data;
