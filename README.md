@@ -22,10 +22,6 @@ There are 4 components
 2- Movie is responsible for data display using props along with image URl generation for title images
 3- Pages is responsible for checking if we can move next or previous page
 4- SortBy is responsible for getting input from user and fetch data accordingly using query_params
-# Next Approaches
-1- Fixing UI bugs
-2- Increase response time
-3- Implementing GraphQL to fetch specific data instead of loaded objects...
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
