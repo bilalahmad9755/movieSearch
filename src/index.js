@@ -10,15 +10,15 @@ import 'firebase/auth';
 import './index.css';
 
 const config = {
-  apiKey: "abc",
-  authDomain: "abc",
-  projectId: "abc",
-  storageBucket: "abc",
-  databaseURL:"https://abc-abc-default-rtdb.firebaseio.com/",
-  messagingSenderId: "abc",
-  appId: "1:abc:web:abc",
-  measurementId: "abc"
-};
+  apiKey: "AIzaSyAD7GWj5lEXdk-m7KJvvPN9J9oLGeEubtk",
+  authDomain: "hellofirebase-1139c.firebaseapp.com",
+  projectId: "hellofirebase-1139c",
+  storageBucket: "hellofirebase-1139c.appspot.com",
+  databaseURL:"https://hellofirebase-1139c-default-rtdb.firebaseio.com/",
+  messagingSenderId: "673623807411",
+  appId: "1:673623807411:web:f6b400522fe3e28a87e7c6",
+  measurementId: "G-B6KQT5K7JN"
+}
 const app = initializeApp(config);
 getDatabase(app);
 

@@ -50,7 +50,7 @@ export const Favourites = (props)=> {
                 else{removeFavourites()}}} 
                 color='primary'
                 variant='contained'>
-                {  loading ? (<CircularProgress size={20} color='#0fac98'/>):(status)}
+                {  loading ? (<CircularProgress size={20} color='inherit'/>):(status)}
             </Button>
         </div>
     )

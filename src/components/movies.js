@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import {Grid } from '@mui/material';
-import { IMG_BASE_URL} from '../APIref';
+
 import { AuthUser } from '../App';
 import {Favourites} from './favourites';
 import '../css/card.css';
@@ -22,7 +22,7 @@ export const Movies = ({movies}) =>
           <br />
           {
             movie.image != null ? (
-            <img className='img' alt='No Preview' src={IMG_BASE_URL + movie.image} width={250} height={250}></img>)
+            <img className='img' alt='No Preview' src={`https://image.tmdb.org/t/p/w300/` + movie.image} width={250} height={250}></img>)
             :(<h1>No Preview</h1>)
           }
           <h2>{movie.name}</h2>
